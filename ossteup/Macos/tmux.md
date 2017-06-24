@@ -214,4 +214,7 @@ Ctrl&#43;o</td>
 </tr>
 </tbody>
 </table>
+<div>
+我已经尝试了在~/.tmux.conf中添加set -g default-terminal "screen-256color",但还是不行，也尝试了在.bashrc中添加alias tmux="tmux -2"
+</div>
 
