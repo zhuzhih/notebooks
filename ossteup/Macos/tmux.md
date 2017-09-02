@@ -218,11 +218,8 @@ Ctrl&#43;o</td>
 我已经尝试了在~/.tmux.conf中添加set -g default-terminal "screen-256color",但还是不行，也尝试了在.bashrc中添加alias tmux="tmux -2"
 </div>
 <div>
-  set -g mouse-resize-pane on<br>
-  set -g mouse-select-pane on<br>
-  set -g mouse-select-window on<br>
-
-  set -g mode-mouse on<br>
+  
+  set-option -g mouse on<br>
 
   bind S setw synchronize-panes on<br>
   bind F setw synchronize-panes off<br>
