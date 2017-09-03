@@ -1,0 +1,96 @@
+打造高效前端工作环境 - tmux
+前言
+
+ 现在前端开发可不容易啊，先打开个VIM，然后再打开个lite-server，一不小心写个ES2015还要打开个gulp来做预编译，如果能把这么多个窗口放在一个工作台上那就好了。咦，tmux不就专干这事的吗？
+tmux入门
+
+安装sudo apt install tmux
+tmux的C/S架构
+
+服务端(Server), 1个服务端维护1～N个会话;
+会话(Session), 1个会话对应1~N个窗口;
+窗口(Window), 1个窗口对应1~N个窗格;
+窗格(Pane)，vim、bash等具体任务就是在窗格中执行。
+
+1.进入tmux
+ 在shell中执行tmux就会自动创建一个匿名会话、窗口和窗格，而窗格内正在运行着另一个shell程序，这时我们可以像平常使用shell一样来工作。而tmux真正的威力在于对会话、窗口和窗格的管理，但在此之前我们要先了解开启魔法的阀门——快捷键前缀(prefix)。
+
+2.快捷键前缀(prefix)
+ tmux为使自身的快捷键和其他软件的快捷键互不干扰，特意提供一个快捷键前缀,默认为Ctrl+b。因此当我们输入任何tmux快捷键前必须先输入Ctrl+b。
+ 由于快捷键前缀是可以重置的，因此后文将以<prefix>来指代快捷键前缀。
+
+3.操作Pane
+创建(通过分割当前pane实现)
+<prefix> ",水平分割当前pane
+<prefix> %,垂直分割当前pane
+关闭
+<prefix> x,删除当前pane
+跳转
+<prefix> <up-arrow>/<down-arrow>/<left-arrow>/<right-arrow>, 通过上下左右方向键跳转到对应的pane
+<prefix> ;,跳转到上次激活的pane
+<prefix> o,跳转到下一个pane
+<prefix> q,显示各pane的编号，并输入编号跳转到对应的pane
+修改尺寸
+<prefix>+alt+<up-arrow>/<down-arrow>/<left-arrow>/<right-arrow>, 通过上下左右方向修改当前pane的高宽
+缩放
+<prefix> z,缩放当前pane
+其他
+<prefix> {,将当前pane移动到最左边
+<prefix> },将当前pane移动到最右边
+<prefix> !,将当前pane转变成window
+
+4.操作Windoiw
+创建
+<prefix> c,创建window
+重命名
+<prefix> ,,重命名当前window
+注意：由于tmux默认会根据当前pane执行的程序来改变window名称，因此需要在~/.tmux.conf中加入set-option -g allow-rename off来固化window名称。
+关闭
+<prefix> &,关闭当前window
+跳转
+<prefix> n,跳转到下一个window
+<prefix> p,跳转到上一个window
+<prefix> 0...9,跳转到对应的window
+其他
+<prefix> :swap-window -s 2 -t 1, 调转编号为2和1的两个window的次序
+5.操作Session
+<prefix> s,显示所有会话
+<prefix> $,重命名
+<prefix> d,脱离当前会话
+<prefix> :kill-session,关闭当前会话
+<prefix> (,跳转到上一个会话
+<prefix> ),跳转到下一个会话
+tmux进阶
+
+1.细抠Session操作
+ 我们为前端开发环境和后端开发环境分别创建两个Session来独立管理，那么我们就可以灵活地在两个Session间穿梭，并且可以分别和前端、后端开发人员协同工作，下面我们看看相关的命令吧。
+$ tmux 或 <prefix> :new, 创建匿名Session
+$ tmux new -s mysession 或 <prefix> :new -s mysession, 创建名为mysession的Session
+$ tmux kill-session -t mysession,关闭mysession会话
+$ tmux kill-session -a,关闭所有会话
+$ tmux ls,显示所有会话信息
+$ tmux a,附加到最近一个会话
+$ tmux a -t mysession,附加到会话mysession
+
+2.多个panes输入同步
+<prefix> + :setw synchronize-panes
+
+ 这个功能在通过ssh维护多台服务器时十分有用！
+
+3.复制粘贴
+ 通过tmux我们可以通过纯键盘操作实现跨pane的复制粘贴。首先在~/.tmux.conf文件中添加setw -g mode-keys vi，启用vi键盘方式(hjkl方向键,/?nN搜索)操作buffer内容。
+进入复制模式,<prefix> [
+开始选择,<Spacebar>
+选择结束并将内容复制到新的buffer,<Enter>
+取消选择,<Esc>
+从buffer_0粘贴到光标位置，<prefix> ]
+ 可见复制的内容均暂存在buffer中，而tmux也提供直接操作buffer的命令给我们.
+<prefix> : show-buffer，显示buffer_0的内容
+<prefix> : capture-pane, 保存当前pane的内容
+<prefix> : list-buffers, 显示所有buffer内容
+<prefix> : choose-buffer, 选择buffer并粘贴
+<prefix> : save-buffer buf.txt, 保存buffer内容到but.txt
+<prefix> : delete-buffer -b 1, 删除buffer_1的内容
+
+4.美化状态栏
+ 默认的tmux样式有点丑，而https://github.com/gpakosz/.tmux这个配置则为我们提供漂亮状态栏.
