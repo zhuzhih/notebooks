@@ -19,7 +19,7 @@ Unix Toolbox 版本：12<br />
 你可以到 <a href="http://cb.vu/unixtoolbox.xhtml">http://cb.vu/unixtoolbox.xhtml</a> 找到本文档的最新版。PDF版本可以替换链接中的.xhtml为 <a href="http://cb.vu/unixtoolbox.pdf">.pdf</a> ，小册子版本可以替换成 <a href="http://cb.vu/unixtoolbox.book.pdf">.book.pdf</a> 。 用双面打印机可将小册子打印成册。<span class="web">这份XHTML页面可以通过CSS3相兼容的应用程序转换成一份漂亮的PDF文档(看 <a class="xref" href="#bourneexample">脚本例子</a>).</span><br />
 错误报告和评论是最欢迎的 - <a href="mailto:c\at\cb.vu">c@cb.vu</a> Colin Barschel.<br />
 你可以到<a href="http://code.google.com/p/unixtoolboxcn/">http://code.google.com/p/unixtoolboxcn/</a>找到中文最新版。<br />
-也可到我的主页获取<a href="http://silenceisdefeat.org/~greco/unixtoolbox_zh_CN.xhtml">http://silenceisdefeat.org/~greco/unixtoolbox_zh_CN.xhtml</a><br />
+也可到作者的主页获取<a href="http://silenceisdefeat.org/~greco/unixtoolbox_zh_CN.xhtml">http://silenceisdefeat.org/~greco/unixtoolbox_zh_CN.xhtml</a><br />
 关于中文版的任何错误和修正请发送E-Mail到 <a href="mailto:greco.open\at\gmail.com"><![CDATA["Greco Shi" <greco.open@gmail.com>]]></a> 
 
 <p class="copyright">&#169; <a href="mailto:c_at_cb.vu">Colin Barschel and Greco Shi</a> 2007-2008. <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved under Creative Commons</a>.
